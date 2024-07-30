@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Photo Capture</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #camera {
+            border: 1px solid #ccc;
+        }
+        #controls {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Capture and Save Photo</h1>
+    <video id="camera" width="640" height="480" autoplay></video>
+    <button id="capture">Capture Photo</button>
+    <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+    <div id="controls">
+        <button id="save" style="display:none;">Save Photo</button>
+    </div>
+
+    <script>
+        const video = document.getElementById('camera');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const captureButton = document.getElementById('capture');
+        const saveButton = document.getElementById('save');
+
+        // Request access to the user's webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(error => {
+                console.error('Error accessing webcam:', error);
+            });
+
+        // Capture photo
+        captureButton.addEventListener('click', () => {
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            saveButton.style.display = 'inline';
+        });
+
+        // Save photo
+        saveButton.addEventListener('click', () => {
+            const dataUrl = canvas.toDataURL('image/jpeg');
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = 'photo.jpg';
+            link.click();
+        });
+    </script>
+</body>
+</html>
