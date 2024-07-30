@@ -50,10 +50,8 @@
 
         // Capture photo
         captureButton.addEventListener('click', () => {
-            // Calculate the cropping area (center crop)
-            const sx = (video.videoWidth - 320) / 2;
-            const sy = (video.videoHeight - 400) / 2;
-            context.drawImage(video, sx, sy, 320, 400, 0, 0, 320, 400);
+            // Draw the image to the canvas, scaling it down to 320x400
+            context.drawImage(video, 0, 0, 320, 400);
             saveButton.style.display = 'inline';
         });
 
