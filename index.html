@@ -13,12 +13,14 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            font-family:sans-serif;
         }
         #camera {
             border: 1px solid #ccc;
         }
         #controls {
             margin-top: 10px;
+            text-align:center;
         }
         .video-container {
             width: 320px;
@@ -30,6 +32,7 @@
             width: 400px;
             float: left;
             text-align:center;
+            margin: 20px;
         }
     </style>
 </head>
@@ -44,9 +47,17 @@
     </div>
        
     <div id="controls">
-        <button id="capture">Capture Photo</button><br>
-        Barcode: <input type="text" id="barcode"><br>
-        <button id="save" style="display:none;">Save Photo</button>
+        <button id="capture">Capture Photo</button><be><br>
+        Barcode: <input type="text" id="barcode"><br><br>
+        <button id="save" style="display:none;">Save Photo</button><br><br>
+        sx: <input type="text" id="sx"><br>
+        sy: <input type="text" id="sy"><br>
+        swidth: <input type="text" id="swidth"><br>
+        sheight: <input type="text" id="sheight"><br>
+        x: <input type="text" id="x"><br>
+        y: <input type="text" id="y"><br>
+        width: <input type="text" id="width"><br>
+        height: <input type="text" id="height"><br>
     </div>
 
     <script>
@@ -69,8 +80,18 @@
         // Capture photo
         captureButton.addEventListener('click', () => {
             // Draw the image to the canvas, scaling it down to 320x400
-            context.drawImage(video, 100, 0, 320, 400, 0, 0, 320, 400);
+            //context.drawImage(video, 100, 0, 320, 400, 0, 0, 320, 400);
+            var sx  = document.getElementById("sx").value;
+            var sy = document.getElementById("sy").value;
+            var swidth = document.getElementById("swidth").value;
+            var sheight = document.getElementById("sheight").value;
+            var x = document.getElementById("x").value;
+            var y = document.getElementById("y").value;
+            var width = document.getElementById("width").value;
+            var height = document.getElementById("height").value;
+            context.drawImage(video, sx,sy,swidth,sheight,x,y,width,height);
             saveButton.style.display = 'inline';
+            
         });
 
         // Save photo
