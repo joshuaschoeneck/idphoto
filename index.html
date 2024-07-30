@@ -26,16 +26,26 @@
             overflow: hidden;
             position: relative;
         }
+        .position1 {
+            width: 400px;
+            float: left;
+            text-align:center;
+        }
     </style>
 </head>
 <body>
-    <h1>Capture and Save Photo</h1>
-    <div style="height:600px; width:320px; overflow-x:hidden;">
-    <video id="camera" width="533px" height="400px" autoplay="" style="margin-left:-100px"></video>
+    <div style="text-align:center">
+        <div class="position1" style="height:600px; width:320px; overflow-x:hidden;">
+            <video id="camera" width="533px" height="400px" autoplay="" style="margin-left:-100px"></video>
+        </div>
+        <div class="position1">
+            <canvas id="canvas" width="533" height="400"></canvas>
+        </div>
     </div>
-    <button id="capture">Capture Photo</button>
-    <canvas id="canvas" width="533" height="400"></canvas>
+       
     <div id="controls">
+        <button id="capture">Capture Photo</button><br>
+        Barcode: <input type="text" id="barcode"><br>
         <button id="save" style="display:none;">Save Photo</button>
     </div>
 
@@ -68,7 +78,7 @@
             const dataUrl = canvas.toDataURL('image/jpeg');
             const link = document.createElement('a');
             link.href = dataUrl;
-            link.download = 'photo.jpg';
+            link.download = document.getElementById("barcode").value +'.jpg';
             link.click();
         });
     </script>
