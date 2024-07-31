@@ -14,12 +14,7 @@
         #camera {
             border: 1px solid #ccc;
         }
-        #controls {
-            margin-top: 10px;
-            text-align: center;
-            display: block;
-            clear:left;
-        }
+
         .video-container {
             width: 320px;
             height: 480px;
@@ -36,17 +31,15 @@
 </head>
 <body>
     <div style="text-align:center">
-        <div id="capdiv" class="position1" style="height:480px; width:384px; overflow:hidden;">
+        <div id="capdiv" class="position1" style="height:480px; width:384px; overflow:hidden; z-index:0;">
             <video id="camera" width="640" height="480" autoplay="" style="margin-left:-128px"></video>           
+            <div style="position:absolute; top:20px; left:20px; z-index:1;">
+                <img id="oval" src="oval.png" height="480" width="384">
+            </div>
         </div>
         <div class="position1">
             <canvas id="canvas" width="320" height="400" style="border: 1px solid black;"></canvas>
-        </div>
-    </div>
-
-    
-    <div id="controls">
-        <button id="capture">Capture Photo</button><br><br>
+             <br><br><button id="capture">Capture Photo</button><br><br>
         Barcode:<br><input type="text" id="barcode"><br><br>
         <button id="save" style="display:none;">Save Photo</button><br><br>
         <!--
@@ -59,7 +52,10 @@
         width: <input type="text" id="width">320<br>
         height: <input type="text" id="height">400<br>
         -->
+        </div>
     </div>
+
+   
 
     <script>
         const video = document.getElementById('camera');
