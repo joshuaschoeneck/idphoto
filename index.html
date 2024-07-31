@@ -30,6 +30,11 @@
             text-align:center;
             margin: 20px;
         }
+        .position1 {
+            width: 400px;
+            text-align:center;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
@@ -37,8 +42,8 @@
         <div class="position1" style="height:480px; width:384px; overflow:hidden;">
             <video id="camera" width="640" height="480" autoplay="" style="margin-left:-128px"></video>
         </div>
-        <div class="position1">
-            <canvas id="canvas" width="320" height="400"></canvas>
+        <div class="position2">
+            <canvas id="canvas" width="320" height="400" style="border: 1px solid black;"></canvas>
         </div>
     </div>
     
@@ -47,6 +52,7 @@
         <button id="capture">Capture Photo</button><br><br>
         Barcode:<br><input type="text" id="barcode"><br><br>
         <button id="save" style="display:none;">Save Photo</button><br><br>
+        <!--
         sx: <input type="text" id="sx">128<br>
         sy: <input type="text" id="sy">0<br>
         swidth: <input type="text" id="swidth">384<br>
@@ -55,6 +61,7 @@
         y: <input type="text" id="y">0<br>
         width: <input type="text" id="width">320<br>
         height: <input type="text" id="height">400<br>
+        -->
     </div>
 
     <script>
@@ -77,28 +84,41 @@
         // Capture photo
         captureButton.addEventListener('click', () => {
             // Draw the image to the canvas, scaling it down to 320x400
-            //context.drawImage(video, 100, 0, 320, 400, 0, 0, 320, 400);
+            context.drawImage(video, 128, 0, 384, 480, 0, 0, 320, 400);
             
-            var sx  = document.getElementById("sx").value;
-            var sy = document.getElementById("sy").value;
-            var swidth = document.getElementById("swidth").value;
-            var sheight = document.getElementById("sheight").value;
-            var x = document.getElementById("x").value;
-            var y = document.getElementById("y").value;
-            var width = document.getElementById("width").value;
-            var height = document.getElementById("height").value;
-            context.drawImage(video, sx,sy,swidth,sheight,x,y,width,height);
-            saveButton.style.display = 'inline';
+            
+            //var sx  = document.getElementById("sx").value;
+            //var sy = document.getElementById("sy").value;
+            //var swidth = document.getElementById("swidth").value;
+            //var sheight = document.getElementById("sheight").value;
+            //var x = document.getElementById("x").value;
+            //var y = document.getElementById("y").value;
+            //var width = document.getElementById("width").value;
+            //var height = document.getElementById("height").value;
+            //context.drawImage(video, sx,sy,swidth,sheight,x,y,width,height);
+            //saveButton.style.display = 'inline';
+            document.getElementById("barcode").focus();
             
         });
 
         // Save photo
-        saveButton.addEventListener('click', () => {
+            
+            barcode.addEventListener('keydown', () => {
+                if (event.key === 'Enter') {
+                        document.getElementById("save").click();
+                  }
+            });
+        
+            saveButton.addEventListener('click', () => {
             const dataUrl = canvas.toDataURL('image/jpeg');
             const link = document.createElement('a');
             link.href = dataUrl;
             link.download = document.getElementById("barcode").value +'.jpg';
             link.click();
+            document.getElementById("capture").focus();
+            const context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
+             document.getElementById("barcode").value = '';
         });
     </script>
 </body>
