@@ -33,6 +33,13 @@
     </style>
 </head>
 <body>
+       <div>
+            <video id="camera" width="640" height="480" autoplay=""></video>
+        </div>
+        <div class="position1">
+            <canvas id="canvas" width="640" height="480"></canvas>
+        </div>
+    <!--
     <div style="text-align:center">
         <div class="position1" style="height:600px; width:320px; overflow-x:hidden;">
             <video id="camera" width="533px" height="400px" autoplay="" style="margin-left:-100px"></video>
@@ -41,6 +48,7 @@
             <canvas id="canvas" width="320" height="400"></canvas>
         </div>
     </div>
+    -->
        
     <div id="controls">
         <button id="capture">Capture Photo</button><br><br>
@@ -77,6 +85,7 @@
         captureButton.addEventListener('click', () => {
             // Draw the image to the canvas, scaling it down to 320x400
             //context.drawImage(video, 100, 0, 320, 400, 0, 0, 320, 400);
+            
             var sx  = document.getElementById("sx").value;
             var sy = document.getElementById("sy").value;
             var swidth = document.getElementById("swidth").value;
