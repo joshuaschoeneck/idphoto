@@ -16,7 +16,8 @@
         }
         #controls {
             margin-top: 10px;
-            text-align:center;
+            text-align: center;
+            display: block;
         }
         .video-container {
             width: 320px;
@@ -27,12 +28,12 @@
         .position1 {
             width: 400px;
             float: left;
-            text-align:center;
+            text-align: center;
             margin: 20px;
         }
-        .position1 {
+        .position2 {
             width: 400px;
-            text-align:center;
+            text-align: center;
             margin: 20px;
         }
     </style>
@@ -115,10 +116,10 @@
             link.href = dataUrl;
             link.download = document.getElementById("barcode").value +'.jpg';
             link.click();
-            document.getElementById("capture").focus();
-            const context = canvas.getContext('2d');
             context.clearRect(0, 0, canvas.width, canvas.height);
-             document.getElementById("barcode").value = '';
+            document.getElementById("capture").focus();
+            //const context = canvas.getContext('2d');
+            document.getElementById("barcode").value = '';
         });
     </script>
 </body>
