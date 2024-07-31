@@ -107,10 +107,8 @@
             const link = document.createElement('a');
             link.href = dataUrl;
             link.download = document.getElementById("barcode").value +'.jpg';
-            link.click();
             context.clearRect(0, 0, canvas.width, canvas.height);
-            document.getElementById("capture").focus();
-            //const context = canvas.getContext('2d');
+            link.click();
             document.getElementById("barcode").value = '';
         });
     </script>
